@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 //現在稱為function component
-export default function App() {
+export default () => {
   const name = useFormInput("Jared");
   const school = useFormInput("YUNTECH");
   const [count, setCount] = useState(0);
@@ -11,7 +11,7 @@ export default function App() {
   useDocumentTitle(`You clicked ${count} times`);
 
   return (
-    <div>
+    <>
       name:
       <input {...name} />
       school:
@@ -27,9 +27,9 @@ export default function App() {
         width:
         {width}
       </p>
-    </div>
+    </>
   );
-}
+};
 
 function useFormInput(initialValue) {
   const [value, setValue] = useState(initialValue);
@@ -52,7 +52,6 @@ function useDocumentTitle(title) {
 
 function useWindow() {
   const [width, setWidth] = useState(window.innerWidth);
-
   useEffect(() => {
     const handleWidthResize = () => setWidth(window.innerWidth);
 
@@ -61,6 +60,5 @@ function useWindow() {
       window.removeEventListener("resize", handleWidthResize);
     };
   });
-
   return width;
 }
